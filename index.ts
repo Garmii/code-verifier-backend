@@ -14,12 +14,22 @@ const port: string | number = process.env.PORT || 8000;
 
 app.get('/', (req: Request,res: Response) => {
     //Send Hello World
-    res.send('Root!')
+    res.send('root!')
 });
 
 app.get('/hello', (req: Request,res: Response) => {
     //Send Hello World
-    res.send('Hello world!')
+    res.status(200).json({
+        "message": req.query.name === undefined ? "Hola anonimo" : `Hola ${req.query.name}`
+    })
+});
+
+app.get('/bye', (req: Request, res: Response) => {
+    res.status(200).json(
+        {
+            "message": "Goodbye, world"
+        }
+    )
 });
 
 // Execute APP and listen requests to PORT

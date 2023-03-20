@@ -13,7 +13,18 @@ const port = process.env.PORT || 8000;
 // Define first route of APP
 app.get('/', (req, res) => {
     //Send Hello World
-    res.send('Hello world!');
+    res.send('root!');
+});
+app.get('/hello', (req, res) => {
+    //Send Hello World
+    res.status(200).json({
+        "message": req.query.name === undefined ? "Hola anonimo" : `Hola ${req.query.name}`
+    });
+});
+app.get('/bye', (req, res) => {
+    res.status(200).json({
+        "message": "Goodbye, world"
+    });
 });
 // Execute APP and listen requests to PORT
 app.listen(port, () => console.log(`Running HTTP server at http://localhost:${port}`));
