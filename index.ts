@@ -1,37 +1,14 @@
 import  express, { Express, Request, Response } from "express";
 import dotenv from 'dotenv';
-
-// Configuration of the .env file
+import server from './src/server';
+import { LogError, LogSuccess } from "./src/utils/logger";
+import { error } from "console";
 
 dotenv.config();
-
-// Create Express App
-
-const app: Express = express();
 const port: string | number = process.env.PORT || 8000;
 
-// Define first route of APP
+server.listen(port, () => LogSuccess(`Server running at http://localhost:${port}/api`));
 
-app.get('/', (req: Request,res: Response) => {
-    //Send Hello World
-    res.send('root!')
-});
-
-app.get('/hello', (req: Request,res: Response) => {
-    //Send Hello World
-    res.status(200).json({
-        "message": req.query.name === undefined ? "Hola anonimo" : `Hola ${req.query.name}`
-    })
-});
-
-app.get('/bye', (req: Request, res: Response) => {
-    res.status(200).json(
-        {
-            "message": "Goodbye, world"
-        }
-    )
-});
-
-// Execute APP and listen requests to PORT
-
-app.listen(port, () => console.log(`Running HTTP server at http://localhost:${port}`))
+server.on('error', (error) => {
+LogError(`[SERVEER ERROR]: ${error}`);
+})
