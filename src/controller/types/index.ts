@@ -12,3 +12,8 @@ export type ErrorResponse = {
     error: string,
     messagge: string
 }
+
+export type GoodByeResponse = {
+    message: string,
+    date: Date,
+}
