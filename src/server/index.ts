@@ -21,6 +21,9 @@ server.use(
     routes
     );
 
+    //Static server
+    server.use(express.static('public'));
+
     // TODO Mongoose
 
 server.use(helmet());

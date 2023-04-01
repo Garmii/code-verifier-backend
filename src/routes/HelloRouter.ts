@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { HelloController } from "../controller/HelloController";
 import { LogInfo } from "../utils/logger";
+import { BasicResponse } from "@/controller/types";
 
 
 // Router from Express
@@ -13,7 +14,7 @@ helloRouter.route('/').get(async (req:Request,res:Response) => {
         LogInfo(`Query param -> ${name}`);
         // Controller instance
         const controller: HelloController = new HelloController();
-        const response = await controller.getMessage(name);
+        const response: BasicResponse = await controller.getMessage(name);
 
         return res.send(response);
 })
