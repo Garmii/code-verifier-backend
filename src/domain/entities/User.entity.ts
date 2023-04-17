@@ -7,5 +7,5 @@ export const userEntity = () => {
     age: Number,
   });
 
-  return mongoose.model('users', userSchema);
+  return mongoose.models.users || mongoose.model('users', userSchema);
 };
